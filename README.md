@@ -2,7 +2,7 @@
 
 ## Pre-lude
 
-This will project is all about building a Air bnb clone from scratch.
+This project is all about building a Air bnb clone from scratch.
 throughout development we will be looking at several concepts. currently, we're dealing with our very own interprenter to help us manage and maintain our storage system.
 
 ### The console
