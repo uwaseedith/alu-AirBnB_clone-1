@@ -25,7 +25,7 @@ class TestBaseModel(unittest.TestCase):
         # Check if the updated_at attribute is updated
         self.assertNotEqual(base_model.created_at, base_model.updated_at)
 
-    def test_base_model_to_dict(self):
+    def test_to_dict(self):
         # Create an instance of the BaseModel class
         base_model = BaseModel()
 
