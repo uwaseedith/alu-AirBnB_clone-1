@@ -1,6 +1,10 @@
+#!/usr/bin/python3
 import unittest
-from datetime import datetime
 from models.base_model import BaseModel
+from datetime import datetime
+from time import sleep
+
+
 
 
 class TestBaseModel(unittest.TestCase):
@@ -16,14 +20,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(base_model.created_at, base_model.updated_at)
 
     def test_base_model_save(self):
-        # Create an instance of the BaseModel class
-        base_model = BaseModel()
-
-        # Save the BaseModel instance
-        base_model.save()
-
-        # Check if the updated_at attribute is updated
-        self.assertNotEqual(base_model.created_at, base_model.updated_at)
+        bm = BaseModel()
+        sleep(0.05)
+        first_updated_at = bm.updated_at
+        bm.save()
+        self.assertLess(first_updated_at, bm.updated_at)
 
     def test_to_dict(self):
         # Create an instance of the BaseModel class
