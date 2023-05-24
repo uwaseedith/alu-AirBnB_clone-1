@@ -36,7 +36,7 @@ class TestBaseModel(unittest.TestCase):
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
 
-    def test_base_model_save(self):
+    def test_save(self):
         bm = BaseModel()
         sleep(0.05)
         first_updated_at = bm.updated_at
