@@ -5,8 +5,6 @@ from datetime import datetime
 from time import sleep
 
 
-
-
 class TestBaseModel(unittest.TestCase):
 
     def test_base_model_attributes(self):
