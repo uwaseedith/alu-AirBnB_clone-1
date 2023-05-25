@@ -64,12 +64,11 @@ class TestFileStorage_methods(unittest.TestCase):
 
     def test_new(self):
         bm = BaseModel()
- 
+
         models.storage.new(bm)
-  
+
         self.assertIn("BaseModel." + bm.id, models.storage.all().keys())
         self.assertIn(bm, models.storage.all().values())
-
 
     def test_new_with_args(self):
         with self.assertRaises(TypeError):
@@ -88,23 +87,31 @@ class TestFileStorage_methods(unittest.TestCase):
             save_text = f.read()
             self.assertIn("BaseModel." + bm.id, save_text)
 
-
     def test_save_with_arg(self):
         with self.assertRaises(TypeError):
             models.storage.save(None)
 
-    def test_reload(self):
-        bm = BaseModel()
-        models.storage.new(bm)
-        models.storage.save()
-        models.storage.reload()
-        objs = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + bm.id, objs)
-
-
     def test_reload_with_arg(self):
         with self.assertRaises(TypeError):
             models.storage.reload(None)
+
+    def test_file_storage_reload(self):
+        base_model = BaseModel()
+        base_model.save()
+        file_storage = FileStorage()
+
+        # Save the BaseModel instance to the JSON file
+        file_storage.new(base_model)
+        file_storage.save()
+        # Clear the objects dictionary in FileStorage
+        file_storage._FileStorage__objects = {}
+        # Reload the objects from the JSON file
+        file_storage.reload()
+        # Get the objects dictionary
+        objects = file_storage.all()
+        # Check if the reloaded object is present
+        self.assertIn(base_model.__class__.__name__ +
+                      "." + base_model.id, objects)
 
 
 if __name__ == "__main__":
