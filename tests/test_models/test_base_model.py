@@ -35,11 +35,6 @@ class TestBaseModel(unittest.TestCase):
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
-    
-    def test_base_model_save(self):
-        base_model = BaseModel()
-        base_model.save()
-        self.assertNotEqual(base_model.created_at, base_model.updated_at)
 
 
     def test_save(self):
